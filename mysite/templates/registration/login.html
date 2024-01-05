@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Pantheon - Login
+{% endblock title %}
+
+{% block content %}
+    <div class="login-section">
+        <h2>Login</h2>
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <a href="{% url 'index' %}" class="back-to-home">Home</a>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Username/ Email:</label>
+                <input type="text" name="username" id="id_username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="id_password">Password:</label>
+                <input type="password" name="password" id="id_password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-login">Login</button>
+            <p>Don't have an account? <a href="{% url 'signup' %}" class="signup-link">Signup</a></p>
+        </form>
+    </div>
+{% endblock content %}

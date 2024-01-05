@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Pantheon
+{% endblock title %}
+    
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="welcome-section">
+            <h2>Welcome, {{ user.username }}!</h2>
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <a href="{% url 'logout' %}" class="btn btn-logout">Logout</a>
+        </div>
+        <br>
+        {% if user.is_staff %}
+            <div class="dashboard-section">
+                <a href="" class="btn btn-dashboard">DASHBOARD</a>
+                <p>Total Users: {{ count }}</p>
+                <ul class="user-list">
+                    {% for user in usernames %}
+                        <li>ID: {{ user.id }}, Username: {{ user.username }}, Email: {{ user.email }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock content %}
